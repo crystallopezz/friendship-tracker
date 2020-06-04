@@ -1,0 +1,123 @@
+from flask_sqlalchemy import SQLAlchemy
+
+db = SQLAlchemy()
+
+def connect_to_db(flask_app, db_uri='postgresql:///friendshiptracker', echo=True):
+    flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
+    flask_app.config['SQLALCHEMY_ECHO'] = echo
+    flask_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+    db.app = flask_app
+    db.init_app(flask_app)
+
+    print('Connected to the db!')
+
+class User(db.Model):
+    __tablename__ = 'users'
+
+    user_id = db.Column(db.Integer,
+                        primary_key=True, 
+                        autoincrement=True)
+    email = db.Column(db.String,
+                      nullable=False)
+    password = db.Column(db.String,
+                        nullable=False)
+
+    #friends = list of friend objects that the user has
+
+class Friend_type(db.Model):
+    __tablename__ = 'friend_types'
+
+    friend_key = db.Column(db.String,
+                         primary_key=True,
+                         nullable=False)
+    name = db.Column(db.String,
+                     nullable=False)
+
+    #friends = list of friend objects with that friend type
+
+class Friend(db.Model):
+    __tablename__ = 'friends'
+
+    friend_id = db.Column(db.Integer,
+                        primary_key=True, 
+                        autoincrement=True)
+    user_id = db.Column(db.Integer,
+                        db.ForeignKey('users.user_id'))
+    full_name = db.Column(db.String,
+                          nullable=False)
+    bday = db.Column(db.DateTime,
+                     nullable=False)
+    date_met = db.Column(db.DateTime)
+    picture = db.Column(db.String)
+    friend_type = db.Column(db.String,
+                            db.ForeignKey('friend_types.friend_key'))
+    likes = db.Column(db.Text)
+    dislikes = db.Column(db.Text)
+
+    user = db.relationship('User', backref='friends')
+    ftype = db.relationship('Friend_type', backref='friends')
+
+    #social_medias = list of social media accounts friend has
+    #events = list of events this friend has
+
+
+class Social_type(db.Model):
+    __tablename__ = 'social_types'
+
+    social_type = db.Column(db.String,
+                            primary_key=True)
+    name = db.Column(db.String,
+                     nullable=False)
+
+    #social_medias = list of social_media accts w/ this social_type
+
+class Social_media(db.Model):
+    __tablename__ = 'social_medias'
+
+    social_id = db.Column(db.Integer,
+                        primary_key=True, 
+                        autoincrement=True)
+    friend_id = db.Column(db.Integer,
+                          db.ForeignKey('friends.friend_id'), 
+                          nullable=False)
+    social_type = db.Column(db.Integer, 
+                            db.ForeignKey('social_types.social_type'),
+                            nullable=False)
+    url = db.Column(db.String,
+                    nullable=False)
+
+    friend = db.relationship('Friend', backref='social_medias')
+    stype = db.relationship('Social_type', backref='social_medias')
+
+class Event_type(db.Model):
+    __tablename__ = 'event_types'
+
+    event_key = db.Column(db.String,
+                          primary_key=True)
+    event_type = db.Column(db.String,
+                           nullable=False)
+
+    #events = list of events with this event_key
+
+class Event(db.Model):
+    __tablename__ = 'events'
+
+    event_id = db.Column(db.Integer,
+                         primary_key=True,
+                         autoincrement=True)
+    friend_id = db.Column(db.Integer,
+                          db.ForeignKey('friends.friend_id'),
+                          nullable=False)
+    event_type = db.Column(db.String,
+                           db.ForeignKey('event_types.event_key'),
+                           nullable=False)
+    details = db.Column(db.Text)
+
+    friend = db.relationship('Friend', backref='events')
+    etype = db.relationship('Event_type', backref='events')
+
+if __name__ == '__main__':
+    from flask import Flask
+
+    connect_to_db(Flask(__name__))
