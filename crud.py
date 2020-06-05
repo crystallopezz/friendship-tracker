@@ -31,7 +31,15 @@ def create_friend(user, ftype, full_name, bday, date_met=None, picture=None,
     return friend
 
 def create_social_type(social_type, name):
-    account = Social_type(social_type=social_type, name=name)
+    social = Social_type(social_type=social_type, name=name)
+
+    db.session.add(social)
+    db.session.commit()
+
+    return account
+
+def create_social_account(friend, stype, url):
+    account = Social_media(friend=friend, stype=stype, url=url)
 
     db.session.add(account)
     db.session.commit()
