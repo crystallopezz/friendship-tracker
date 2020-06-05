@@ -11,7 +11,7 @@ def create_user(email, password):
 
 def create_friend_type(friend_key, name):
     """create and return a friend type"""
-    friend_type= Friend_type(friend_key=friend_key, name=name)
+    friend_type = Friend_type(friend_key=friend_key, name=name)
 
     db.session.add(friend_type)
     db.session.commit()
@@ -22,7 +22,7 @@ def create_friend(user, ftype, full_name, bday, date_met=None, picture=None,
                   likes=None, dislikes=None):
     """create and return a friend"""
 
-    friend=Friend(user=user, ftype=ftype, full_name=full_name, bday=bday,
+    friend = Friend(user=user, ftype=ftype, full_name=full_name, bday=bday,
                   date_met=date_met, picture=picture, likes=likes, dislikes=dislikes)
 
     db.session.add(friend)
@@ -30,6 +30,13 @@ def create_friend(user, ftype, full_name, bday, date_met=None, picture=None,
 
     return friend
 
+def create_social_type(social_type, name):
+    account = Social_type(social_type=social_type, name=name)
+
+    db.session.add(account)
+    db.session.commit()
+
+    return account
 
 if __name__ == '__main__':
     from flask import Flask
