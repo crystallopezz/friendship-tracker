@@ -39,6 +39,9 @@ class Friend_type(db.Model):
 
     #friends = list of friend objects with that friend type
 
+    def __repr__(self):
+        return f'<Friend_type friend_key={self.friend_key} name={self.name}>'
+
 class Friend(db.Model):
     __tablename__ = 'friends'
 
@@ -64,6 +67,9 @@ class Friend(db.Model):
     #social_medias = list of social media accounts friend has
     #events = list of events this friend has
 
+    def __repr__(self):
+        return f'<Friend friend_id={self.friend_id} name={self.full_name}>'
+
 
 class Social_type(db.Model):
     __tablename__ = 'social_types'
@@ -74,6 +80,9 @@ class Social_type(db.Model):
                      nullable=False)
 
     #social_medias = list of social_media accts w/ this social_type
+
+    def __repr__(self):
+        return f'<Social_type social_type={self.social_type} name={self.name}>'
 
 class Social_media(db.Model):
     __tablename__ = 'social_medias'
@@ -93,6 +102,9 @@ class Social_media(db.Model):
     friend = db.relationship('Friend', backref='social_medias')
     stype = db.relationship('Social_type', backref='social_medias')
 
+    def __repr__(self):
+        return f'<Social_media social_id={self.social_id} type={self.social_type}>'
+
 class Event_type(db.Model):
     __tablename__ = 'event_types'
 
@@ -102,6 +114,9 @@ class Event_type(db.Model):
                            nullable=False)
 
     #events = list of events with this event_key
+
+    def __repr__(self):
+        return f'<Event_type event_type={self.event_type}>'
 
 class Event(db.Model):
     __tablename__ = 'events'
@@ -119,6 +134,9 @@ class Event(db.Model):
 
     friend = db.relationship('Friend', backref='events')
     etype = db.relationship('Event_type', backref='events')
+
+    def __repr__(self):
+      return f'<Event event_id={self.event.id}, event_typ={self.event_type}'
 
 if __name__ == '__main__':
     from flask import Flask
