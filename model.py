@@ -2,7 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-def connect_to_db(flask_app, db_uri='postgresql:///friendshiptracker', echo=True):
+def connect_to_db(flask_app, db_uri='postgresql:///testdb', echo=True):
     flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
     flask_app.config['SQLALCHEMY_ECHO'] = echo
     flask_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -16,14 +16,17 @@ class User(db.Model):
     __tablename__ = 'users'
 
     user_id = db.Column(db.Integer,
-                        primary_key=True, 
-                        autoincrement=True)
+                        autoincrement=True,
+                        primary_key=True)
     email = db.Column(db.String,
                       nullable=False)
     password = db.Column(db.String,
                         nullable=False)
 
     #friends = list of friend objects that the user has
+
+    def __repr__(self):
+        return f'<User user_id={self.user_id} email={self.email}>'
 
 class Friend_type(db.Model):
     __tablename__ = 'friend_types'
@@ -81,7 +84,7 @@ class Social_media(db.Model):
     friend_id = db.Column(db.Integer,
                           db.ForeignKey('friends.friend_id'), 
                           nullable=False)
-    social_type = db.Column(db.Integer, 
+    social_type = db.Column(db.String, 
                             db.ForeignKey('social_types.social_type'),
                             nullable=False)
     url = db.Column(db.String,
