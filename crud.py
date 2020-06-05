@@ -46,6 +46,15 @@ def create_social_account(friend, stype, url):
 
     return account
 
+def create_event_type(event_key, event_type):
+    """create and return an event type"""
+    event=Event_type(event_key=event_key, event_type=event_type)
+
+    db.session.add(event)
+    db.session.commit()
+
+    return event_type
+
 if __name__ == '__main__':
     from flask import Flask
 
