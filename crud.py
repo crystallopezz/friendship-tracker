@@ -55,6 +55,16 @@ def create_event_type(event_key, event_type):
 
     return event_type
 
+def create_event(friend, etype, details):
+    """create and return event"""
+    event=Event(friend=friend, etype=etype, details=details)
+
+    db.session.add(event)
+    db.session.commit()
+
+    return event
+
+
 if __name__ == '__main__':
     from flask import Flask
 

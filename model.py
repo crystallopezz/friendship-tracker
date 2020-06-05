@@ -136,7 +136,7 @@ class Event(db.Model):
     etype = db.relationship('Event_type', backref='events')
 
     def __repr__(self):
-      return f'<Event event_id={self.event.id}>'
+      return f'<Event event_id={self.event_id}>'
 
 if __name__ == '__main__':
     from flask import Flask
