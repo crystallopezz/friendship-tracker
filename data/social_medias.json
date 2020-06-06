@@ -1,0 +1,37 @@
+[
+    {
+        "stype": "insta",
+        "friend": "Kainat",
+        "url": "https://www.instagram.com/kakmal13/"
+    },
+    {
+        "stype": "insta",
+        "friend": "Abiola",
+        "url": "https://www.instagram.com/abelola/"
+    },
+    {
+        "stype": "insta",
+        "friend": "Shelley",
+        "url": "https://www.instagram.com/shelleysmn/"
+    },
+    {
+        "stype": "insta",
+        "friend": "Roy",
+        "url": "https://www.instagram.com/cheungrty/"
+    },
+    {
+        "stype": "twitt",
+        "friend": "Roy",
+        "url": "https://twitter.com/cheungrty"
+    },
+    {
+        "stype": "fb",
+        "friend": "Kainat",
+        "url": "https://www.facebook.com/kakmal"
+    },
+    {
+        "stype": "fb",
+        "friend": "Shelley",
+        "url": "https://www.facebook.com/shelley.simon.9"
+    }
+]

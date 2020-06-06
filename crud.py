@@ -36,7 +36,7 @@ def create_social_type(social_type, name):
     db.session.add(social)
     db.session.commit()
 
-    return account
+    return social
 
 def create_social_account(friend, stype, url):
     account = Social_media(friend=friend, stype=stype, url=url)
@@ -55,9 +55,9 @@ def create_event_type(event_key, event_type):
 
     return event_type
 
-def create_event(friend, etype, details):
+def create_event(friend, etype, details, date):
     """create and return event"""
-    event=Event(friend=friend, etype=etype, details=details)
+    event=Event(friend=friend, etype=etype, details=details, date=date)
 
     db.session.add(event)
     db.session.commit()

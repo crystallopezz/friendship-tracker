@@ -1,0 +1,22 @@
+[
+    {
+        "friend_key":"bff",
+        "name":"best friend"
+    },
+    {
+        "friend_key":"gf",
+        "name":"good friend"
+    },
+    {
+        "friend_key":"acq",
+        "name":"acquaintance"
+    },
+    {
+        "friend_key":"work",
+        "name":"coworker"
+    },
+    {
+        "friend_key":"fam",
+        "name":"family member"
+    }
+]

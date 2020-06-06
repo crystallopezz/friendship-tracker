@@ -1,0 +1,18 @@
+[
+    {
+        "social_type": "insta",
+        "name": "instagram"
+    },
+    {
+        "social_type": "twit",
+        "name": "twitter"
+    },
+    {
+        "social_type": "fb",
+        "name": "facebook"
+    },
+    {
+        "social_type": "lin",
+        "name": "linkedin"
+    }
+]

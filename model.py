@@ -2,7 +2,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
-def connect_to_db(flask_app, db_uri='postgresql:///testdb', echo=True):
+def connect_to_db(flask_app, db_uri='postgresql:///friendshiptracker', echo=True):
     flask_app.config['SQLALCHEMY_DATABASE_URI'] = db_uri
     flask_app.config['SQLALCHEMY_ECHO'] = echo
     flask_app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -131,6 +131,8 @@ class Event(db.Model):
                            db.ForeignKey('event_types.event_key'),
                            nullable=False)
     details = db.Column(db.Text)
+    date = db.Column(db.DateTime,
+                     nullable=False)
 
     friend = db.relationship('Friend', backref='events')
     etype = db.relationship('Event_type', backref='events')

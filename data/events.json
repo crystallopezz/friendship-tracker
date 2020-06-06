@@ -1,0 +1,20 @@
+[
+    {
+        "etype": "irl",
+        "friend": "Kainat",
+        "details": "Kainat and I hung out at my house and watched Selling Sunset. We both really liked Amanza's character.",
+        "date": "2020-06-05"
+    },
+    {
+        "etype": "txt",
+        "friend": "Kainat",
+        "details": "Kainat and I texted about her upcoming event which will be on July 30th, and she wanted to invite me to it.",
+        "date": "2020-05-19"
+    },
+    {
+        "etype": "txt",
+        "friend": "Kainat",
+        "details": "Kainat and I texted about the new animal crossing release. We decided to visit each other's islands soon.",
+        "date": "2020-03-12"
+    }
+]

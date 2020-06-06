@@ -1,0 +1,14 @@
+[
+    {
+        "event_key": "irl",
+        "event_type": "in-person hangout"
+    },
+    {
+        "event_key": "txt",
+        "event_type": "messaging exchange"
+    },
+    {
+        "event_key": "call",
+        "event_type": "phone call"
+    }
+]

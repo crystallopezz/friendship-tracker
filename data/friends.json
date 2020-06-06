@@ -1,0 +1,38 @@
+[
+    {
+        "full_name": "Kainat",
+        "bday": "1995-02-14",
+        "date_met": "2013-08-27",
+        "picture": "/static/kainat.JPG",
+        "likes": "briyani, reality tv, travelling",
+        "dislikes": "laziness, sweet meat, crowded airplanes",
+        "ftype": "fam"
+    },
+    {
+        "full_name": "Shelley",
+        "bday": "1995-07-19",
+        "date_met": "2014-01-13",
+        "picture": "/static/shell.JPG",
+        "likes": "bollywood movies, photography, spending time with family",
+        "dislikes": "complainers, lack of accountability, the color green",
+        "ftype": "bff"
+    },
+    {
+        "full_name": "Roy",
+        "bday": "1993-06-22",
+        "date_met": "2018-03-13",
+        "picture": null,
+        "likes": "tech gadgets, calpico, hanging out with friends",
+        "dislikes": "gloomy weather, oversleeping, being stuck inside",
+        "ftype": "gf"
+    },
+    {
+        "full_name": "Abiola",
+        "bday": "1995-06-27",
+        "date_met": "2007-09-1",
+        "picture": "/static/abiola.JPG",
+        "likes": "being a plant mom, drama videos, podcasts",
+        "dislikes": "running, rude people, video games",
+        "ftype": "bff"
+    }
+]
