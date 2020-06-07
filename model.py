@@ -94,8 +94,7 @@ class Social_media(db.Model):
                           db.ForeignKey('friends.friend_id'), 
                           nullable=False)
     social_type = db.Column(db.String, 
-                            db.ForeignKey('social_types.social_type'),
-                            nullable=False)
+                            db.ForeignKey('social_types.social_type'))
     url = db.Column(db.String,
                     nullable=False)
 

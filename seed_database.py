@@ -12,7 +12,6 @@ os.system('createdb friendshiptracker')
 model.connect_to_db(Flask(__name__))
 model.db.create_all()
 
-
 # seed event_types table
 
 event_types_in_db = []
@@ -58,19 +57,24 @@ for stype in stype_data:
 
 # seed user table
 with open('data/users.json') as users:
-    user_data = json.loads(user.read())
+    user_data = json.loads(users.read())
 
-db_user = crud.create_user(email, password)
+for user in user_data: 
+
+    email = user['email']
+    password = user ['password']
+
+    db_user = crud.create_user(email, password)
 
 # seed friends table
 with open('data/friends.json') as friends:
     friend_data = json.loads(friends.read())
 
-for friend in friends_data:
+for friend in friend_data:
         
     user = db_user
 
-    ftype = db.Friend_type.query.get(friend['ftype'])
+    ftype = model.Friend_type.query.get(friend['ftype'])
 
     full_name = friend['full_name']
 
@@ -93,9 +97,9 @@ with open('data/events.json') as events:
 
 for event in event_data:
 
-    friend = db.Friend.query.filter_by(name=event['friend']).first()
+    friend = model.Friend.query.filter_by(full_name=event['friend']).first()
 
-    etype = db.Event_type.query.get(event['etype'])
+    etype = model.Event_type.query.get(event['etype'])
 
     details = event['details']
 
@@ -107,10 +111,10 @@ for event in event_data:
 with open('data/social_medias.json') as socials:
         social_data = json.loads(socials.read())
 
-for social in socials:
+for social in social_data:
 
-    friend = db.Friend.query.filter_by(name=social['friend']).first()
-    stype = db.query.get(social['stype'])
+    friend = model.Friend.query.filter_by(full_name=social['friend']).first()
+    stype = model.Social_type.query.get(social['stype'])
     url = social['url']
 
     crud.create_social_account(friend, stype, url)
