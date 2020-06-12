@@ -9,6 +9,23 @@ def create_user(email, password):
 
     return user
 
+def get_user_by_email(email):
+    """return user with email"""
+    return User.query.filter(User.email==email).first()
+
+def validate_user_password(input_pw, email):
+    """check if input password matches user's password"""
+    user = get_user_by_email(email)
+
+    #TODO - add check for if a user with that email exists. 
+
+    return user.password == input_pw
+
+def get_user_id(email):
+    user = User.query.filter(User.email==email).first()
+    user_id = user.user_id
+    return user_id
+
 def create_friend_type(friend_key, name):
     """create and return a friend type"""
     friend_type = Friend_type(friend_key=friend_key, name=name)
@@ -29,6 +46,17 @@ def create_friend(user, ftype, full_name, bday, date_met=None, picture=None,
     db.session.commit()
 
     return friend
+
+def get_friend_by_friend_id(user_id, friend_id):
+    
+    return Friend.query.filter_by(friend_id = friend_id, user_id = user_id ).first()
+
+     
+
+def get_friends_by_user_id(user_id): 
+    user = User.query.get(user_id)
+    friends = user.friends
+    return friends
 
 def create_social_type(social_type, name):
     social = Social_type(social_type=social_type, name=name)
