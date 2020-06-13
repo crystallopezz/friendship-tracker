@@ -21,10 +21,9 @@ def validate_user_password(input_pw, email):
 
     return user.password == input_pw
 
-def get_user_id(email):
-    user = User.query.filter(User.email==email).first()
-    user_id = user.user_id
-    return user_id
+def get_user_by_id(user_id):
+    user = User.query.get(user_id)
+    return user
 
 def create_friend_type(friend_key, name):
     """create and return a friend type"""
@@ -92,6 +91,8 @@ def create_event(friend, etype, details, date):
 
     return event
 
+def get_friend_types():
+    return Friend_type.query.all()
 
 if __name__ == '__main__':
     from flask import Flask

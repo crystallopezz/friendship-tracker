@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Friend{% endblock %}
+
+{% block body %}
+  <h1>Add New Friend</h1>
+
+  <div>
+    <form action="/friends" method="POST">
+      <p>
+        Full Name: <input type="text" name="name" required>
+      </p>
+
+      <p>
+        Birthday: <input type="date" name="bday" required>
+      </p>
+
+      <p>
+        When did you meet? (if you don't remember the exact day, just put the 
+        first of the month or the first of the year): 
+        <input type="date" name="met" required>
+      </p>
+
+      <p>
+        Picture: <input type="file" name="pic">
+      </p>
+
+      <p>
+        Likes: <input type="text" name="likes">
+      </p>
+
+      <p>
+        Dislikes: <input type="text" name="dislikes">
+      </p>
+
+      <p>
+        Friend type: 
+        <select name='friend_type'>
+          {% for type in types %}
+          <option value={{type.friend_key}}>{{type.name}}</option>
+          {% endfor %}
+        </select>
+      </p>      
+
+      <p>
+        <input type="submit">
+      </p>
+  </div>
+
+{%endblock%}

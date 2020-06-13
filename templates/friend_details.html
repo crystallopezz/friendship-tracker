@@ -5,6 +5,35 @@
 
 <h1>{{ friend.full_name }}</h1>
 
+<div id='pic'><img src={{friend.picture}}></div>
+
+<div id='info'>
+
+  <li>Birthday: {{friend.bday}}</li>
+  <li>When we met: {{friend.date_met}}</li>
+  <li>Friend type: {{friend.ftype.name}}</li>
+  <li>Likes: {{friend.likes}}</li>
+  <li>Dislikes: {{friend.dislikes}}</li>
+
+  {% for social in friend.social_medias %}
+  <li><a href={{social.url}}>{{ social.stype.name}}<a></li>
+  {% endfor %}
+
+
+</div>
+
+<div id='events'>
+  {% for event in friend.events %}
+  <li>
+    {{ event.date }}
+    {{ event.etype.event_type }}
+    {{ event.details }}
+  </li>
+  {% endfor %}
+</ul>
+
+</div>
+
 
 
 {% endblock %}

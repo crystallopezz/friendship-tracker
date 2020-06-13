@@ -17,34 +17,56 @@ def login():
     """look for user by email and password"""
     email=request.form.get('email')
     input_pw=request.form.get('password')
-    user_id = crud.get_user_id(email)
-    # get user by email ^
+    user = crud.get_user_by_email(email)
+    user_id = user.user_id
 
     session['user_id'] = user_id
 
-
     if crud.validate_user_password(input_pw, email):
 
-        #TODO add user ID to session
-
-        return redirect(f'/friends/{user_id}')
+        return redirect(f'/users/{user_id}/friends')
 
     # TODO turn in to flash message
     # else: 
     #     return alert('Email or password is incorrect.')
 
-@app.route('/friends/<user_id>')
-# users/user_id/friends
+@app.route('/users/<user_id>/friends')
 def show_users_friends_list(user_id):
+    """display list of friends"""
     friends = crud.get_friends_by_user_id(user_id)
     return render_template('friends_list.html', friends = friends)
 
-# friends/friend_id
-@app.route('/friend/<friend_id>') 
+
+@app.route('/friends/<friend_id>') 
 def show_friend_details(friend_id):
+    """display details about specific friend"""
     friend = crud.get_friend_by_friend_id(session['user_id'], friend_id)
 
-    return f"<h1>hello {friend.full_name}</h2>"
+    return render_template('friend_details.html', friend = friend)
+
+@app.route('/friends/add-friend')
+def add_friend_form():
+    """form where user can add a new friend"""
+    types = crud.get_friend_types()
+    return render_template('add_friend.html', types = types)
+
+@app.route('/friends', methods=['POST'])
+def add_friend():
+    """add friend to database"""
+    user = crud.get_user_by_id(1)
+    ftype = request.form.get('friend_type')
+    full_name = request.form.get('name')
+    bday = request.form.get('bday')
+    date_met = request.form.get('met')
+    picture = request.form.get('pic')
+    likes = request.form.get('likes')
+    dislikes = request.form.get('dislikes')
+
+    crud.create_friend(user, ftype, full_name, bday, date_met, picture, 
+                  likes, dislikes)
+
+    return redirect('/users/<user_id>/friends')
+
 
 
 if __name__ == '__main__':

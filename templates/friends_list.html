@@ -3,11 +3,13 @@
 
 {%block body%}
 
+<a href="/friends/add-friend">Add New Friend</a>
+
 <ul>
   {% for friend in friends %}
   <li>
     <div>
-      <a href='/friends/{{ friend.user_id }}/{{ friend.friend_id }}'>{{ friend.full_name }}</a>
+      <a href='/friends/{{ friend.friend_id }}'>{{ friend.full_name }}</a>
       <img src={{friend.picture}}>
     </div>
   </li>
