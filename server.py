@@ -36,14 +36,6 @@ def show_users_friends_list(user_id):
     friends = crud.get_friends_by_user_id(user_id)
     return render_template('friends_list.html', friends = friends)
 
-
-@app.route('/friends/<friend_id>') 
-def show_friend_details(friend_id):
-    """display details about specific friend"""
-    friend = crud.get_friend_by_friend_id(session['user_id'], friend_id)
-
-    return render_template('friend_details.html', friend = friend)
-
 @app.route('/friends/add-friend')
 def add_friend_form():
     """form where user can add a new friend"""
@@ -72,10 +64,35 @@ def add_friend():
 
     return redirect(f'/users/{user_id}/friends')
 
+@app.route('/friends/<friend_id>') 
+def show_friend_details(friend_id):
+    """display details about specific friend"""
+    friend = crud.get_friend_by_friend_id(friend_id)
 
+    return render_template('friend_details.html', friend = friend)
 
+@app.route('/events/add-event')
+def add_event_form():
+    types = crud.get_event_types()
+    user_id = session['user_id']
+    friends = crud.get_friends_by_user_id(user_id)
+    return render_template('add_event.html', types = types, friends = friends)
 
+@app.route('/events', methods=['POST'])
+def add_event():
 
+    friend_id = request.form.get('friend')
+    friend = crud.get_friend_by_friend_id(friend_id)
+
+    event_key = request.form.get('event_type')
+    etype = crud.get_etype_by_key(event_key)
+
+    details = request.form.get('details')
+    date = request.form.get('event_date')
+
+    crud.create_event(friend, etype, details, date)
+
+    return redirect(f'/friends/{friend_id}')
 
 if __name__ == '__main__':
     connect_to_db(app)

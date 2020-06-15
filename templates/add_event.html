@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}Add Event{% endblock %}
+
+{% block body %}
+  <h1>Add New Event</h1>
+
+  <div>
+    <form action="/events" method="POST">
+
+      <p>
+        Friend: 
+        <select name='friend'>
+          {% for friend in friends %}
+          <option value={{friend.friend_id}}>{{friend.full_name}}</option>
+          {% endfor %}
+        </select>
+      </p>
+
+      <p>
+        Event Type: 
+        <select name='event_type'>
+          {% for type in types %}
+          <option value={{type.event_key}}>{{type.event_type}}</option>
+          {% endfor %}
+        </select>
+      </p>
+
+      <p>
+        Details: <input type="text" name="details" required>
+      </p>
+
+      <p>
+        Date: <input type="date" name="event_date" required>
+      </p>
+
+      <p>
+        <input type="submit">
+      </p>
+  </div>
+
+{%endblock%}

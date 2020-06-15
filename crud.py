@@ -46,9 +46,9 @@ def create_friend(user, ftype, full_name, bday, date_met=None, picture=None,
 
     return friend
 
-def get_friend_by_friend_id(user_id, friend_id):
+def get_friend_by_friend_id(friend_id):
     
-    return Friend.query.filter_by(friend_id = friend_id, user_id = user_id ).first()
+    return Friend.query.get(friend_id)
 
      
 
@@ -90,6 +90,12 @@ def create_event(friend, etype, details, date):
     db.session.commit()
 
     return event
+
+def get_event_types():
+    return Event_type.query.all()
+
+def get_etype_by_key(event_key):
+    return Event_type.query.get(event_key)
 
 def get_friend_types():
     return Friend_type.query.all()
