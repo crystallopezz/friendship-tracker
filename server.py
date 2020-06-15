@@ -53,8 +53,13 @@ def add_friend_form():
 @app.route('/friends', methods=['POST'])
 def add_friend():
     """add friend to database"""
-    user = crud.get_user_by_id(1)
-    ftype = request.form.get('friend_type')
+    user_id = session['user_id']
+    print(user_id)
+    user = crud.get_user_by_id(user_id)
+    print(user)
+    print(type(user))
+    friend_key = request.form.get('friend_type')
+    ftype = crud.get_friend_type_by_key(friend_key)
     full_name = request.form.get('name')
     bday = request.form.get('bday')
     date_met = request.form.get('met')
@@ -65,7 +70,10 @@ def add_friend():
     crud.create_friend(user, ftype, full_name, bday, date_met, picture, 
                   likes, dislikes)
 
-    return redirect('/users/<user_id>/friends')
+    return redirect(f'/users/{user_id}/friends')
+
+
+
 
 
 

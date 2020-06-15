@@ -94,6 +94,9 @@ def create_event(friend, etype, details, date):
 def get_friend_types():
     return Friend_type.query.all()
 
+def get_friend_type_by_key(friend_key):
+    return Friend_type.query.get(friend_key)
+
 if __name__ == '__main__':
     from flask import Flask
 
