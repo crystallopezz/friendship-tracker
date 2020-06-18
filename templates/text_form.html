@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}Send A Text{% endblock %}
+
+{% block body %}
+  <h1>Send a Text</h1>
+
+  <div>
+    <form action="/texts" method="POST">
+      <p>
+        Phone Number: <input type="text" name="phone_number" required>
+      </p>
+
+      <p>
+        Message: <input type="text" name="message">
+      </p>
+
+      <p>
+        <input type="submit">
+      </p>
+  </div>
+
+{%endblock%}

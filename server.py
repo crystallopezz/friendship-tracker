@@ -2,10 +2,19 @@ from flask import (Flask, render_template, request, flash, session, redirect)
 from model import connect_to_db
 import crud
 from jinja2 import StrictUndefined
+import os
+import requests
+from twilio.rest import Client
+
 
 app = Flask(__name__)
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
+
+account_sid = os.environ['account_sid']
+auth_token = os.environ['auth_token']
+messaging_sid = os.environ['messaging_service_sid']
+
 
 @app.route('/')
 def show_login():
@@ -67,6 +76,7 @@ def add_friend():
 @app.route('/friends/<friend_id>') 
 def show_friend_details(friend_id):
     """display details about specific friend"""
+    # friend = crud.get_friend_by_friend_id(friend_id)
     friend = crud.get_friend_by_friend_id(friend_id)
 
     return render_template('friend_details.html', friend = friend)
@@ -93,6 +103,29 @@ def add_event():
     crud.create_event(friend, etype, details, date)
 
     return redirect(f'/friends/{friend_id}')
+
+@app.route('/texts/send-text')
+def send_text_form():
+    return render_template('text_form.html')
+
+@app.route('/texts', methods=['POST'])
+def send_text():
+    body = request.form.get('message')
+    to = request.form.get('phone_number')
+
+    client = Client(account_sid, auth_token)
+
+    message = client.messages \
+                .create(
+                     body=body,
+                     from_="+12058469126",
+                     to=to
+                )
+
+    print(message.sid)
+
+    return redirect('/texts/send-text')
+
 
 if __name__ == '__main__':
     connect_to_db(app)
