@@ -3,8 +3,8 @@ from model import connect_to_db
 import crud
 from jinja2 import StrictUndefined
 import os
-import requests
 from twilio.rest import Client
+import cloudinary
 
 
 app = Flask(__name__)
@@ -14,6 +14,15 @@ app.jinja_env.undefined = StrictUndefined
 account_sid = os.environ['account_sid']
 auth_token = os.environ['auth_token']
 messaging_sid = os.environ['messaging_service_sid']
+cloud_name = os.environ['cloud_name']
+cloud_api_key = os.environ['cloud_api_key']
+cloud_api_secret = os.environ['cloud_api_secret']
+
+my_cloudinary = cloudinary.config( 
+  cloud_name = cloud_name, 
+  api_key = cloud_api_key, 
+  api_secret = cloud_api_secret 
+)
 
 
 @app.route('/')
@@ -65,6 +74,7 @@ def add_friend():
     bday = request.form.get('bday')
     date_met = request.form.get('met')
     picture = request.form.get('pic')
+    print(picture)
     likes = request.form.get('likes')
     dislikes = request.form.get('dislikes')
 
