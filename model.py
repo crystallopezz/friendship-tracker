@@ -1,4 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
+from flask import Flask
+
+app = app = Flask(__name__)
 
 db = SQLAlchemy()
 
@@ -140,6 +143,5 @@ class Event(db.Model):
       return f'<Event event_id={self.event_id}>'
 
 if __name__ == '__main__':
-    from flask import Flask
 
-    connect_to_db(Flask(__name__))
+    connect_to_db(app)

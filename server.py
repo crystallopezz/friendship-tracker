@@ -1,13 +1,13 @@
 from flask import (Flask, render_template, request, flash, session, redirect)
-from model import connect_to_db
+from model import connect_to_db, app
 import crud
 from jinja2 import StrictUndefined
 import os
 from twilio.rest import Client
 import cloudinary
+import cloudinary.uploader
+import cloudinary.api
 
-
-app = Flask(__name__)
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
 
@@ -17,12 +17,6 @@ messaging_sid = os.environ['messaging_service_sid']
 cloud_name = os.environ['cloud_name']
 cloud_api_key = os.environ['cloud_api_key']
 cloud_api_secret = os.environ['cloud_api_secret']
-
-my_cloudinary = cloudinary.config( 
-  cloud_name = cloud_name, 
-  api_key = cloud_api_key, 
-  api_secret = cloud_api_secret 
-)
 
 
 @app.route('/')
@@ -63,22 +57,30 @@ def add_friend_form():
 @app.route('/friends', methods=['POST'])
 def add_friend():
     """add friend to database"""
+    
+    my_cloudinary = cloudinary.config( 
+        cloud_name = cloud_name, 
+        api_key = cloud_api_key, 
+        api_secret = cloud_api_secret 
+    )
+
     user_id = session['user_id']
-    print(user_id)
     user = crud.get_user_by_id(user_id)
-    print(user)
-    print(type(user))
     friend_key = request.form.get('friend_type')
     ftype = crud.get_friend_type_by_key(friend_key)
     full_name = request.form.get('name')
     bday = request.form.get('bday')
     date_met = request.form.get('met')
-    picture = request.form.get('pic')
-    print(picture)
+
+    photo_uploaded = request.files['pic']
+    print(photo_uploaded)
+    cloudinary_upload = cloudinary.uploader.upload(photo_uploaded)
+    photo_url = cloudinary_upload['url']
+
     likes = request.form.get('likes')
     dislikes = request.form.get('dislikes')
 
-    crud.create_friend(user, ftype, full_name, bday, date_met, picture, 
+    crud.create_friend(user, ftype, full_name, bday, date_met, photo_url, 
                   likes, dislikes)
 
     return redirect(f'/users/{user_id}/friends')
@@ -87,6 +89,7 @@ def add_friend():
 def show_friend_details(friend_id):
     """display details about specific friend"""
     # friend = crud.get_friend_by_friend_id(friend_id)
+
     friend = crud.get_friend_by_friend_id(friend_id)
 
     return render_template('friend_details.html', friend = friend)

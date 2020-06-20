@@ -1,4 +1,4 @@
-from model import db, connect_to_db, User, Friend_type, Friend, Social_type, Social_media, Event_type, Event
+from model import db, connect_to_db, User, Friend_type, Friend, Social_type, Social_media, Event_type, Event, app
 
 def create_user(email, password):
     """Create and return a new user"""
@@ -106,4 +106,4 @@ def get_friend_type_by_key(friend_key):
 if __name__ == '__main__':
     from flask import Flask
 
-    connect_to_db(Flask(__name__))
+    connect_to_db(app)

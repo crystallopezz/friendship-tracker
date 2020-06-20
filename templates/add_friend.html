@@ -6,7 +6,7 @@
   <h1>Add New Friend</h1>
 
   <div>
-    <form action="/friends" method="POST">
+    <form enctype="multipart/form-data" action="/friends" method="POST">
       <p>
         Full Name: <input type="text" name="name" required>
       </p>
@@ -22,7 +22,7 @@
       </p>
 
       <p>
-        Picture: <input type="file" name="pic">
+        Picture: <input id="pic" type="file" name="pic">
       </p>
 
       <p>

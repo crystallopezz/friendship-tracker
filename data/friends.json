@@ -21,7 +21,7 @@
         "full_name": "Roy",
         "bday": "1993-06-22",
         "date_met": "2018-03-13",
-        "picture": null,
+        "picture": "/static/Roy.jpg",
         "likes": "tech gadgets, calpico, hanging out with friends",
         "dislikes": "gloomy weather, oversleeping, being stuck inside",
         "ftype": "gf"

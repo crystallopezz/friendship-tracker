@@ -5,11 +5,10 @@ import crud
 import model
 from flask import Flask
 
-
 os.system('dropdb friendshiptracker')
 os.system('createdb friendshiptracker')
 
-model.connect_to_db(Flask(__name__))
+model.connect_to_db(model.app)
 model.db.create_all()
 
 # seed event_types table

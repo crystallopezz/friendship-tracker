@@ -16,13 +16,14 @@
   <li>Dislikes: {{friend.dislikes}}</li>
 
   {% for social in friend.social_medias %}
-  <li><a href={{social.url}}>{{ social.stype.name}}<a></li>
+    <li><a href={{social.url}}>{{ social.stype.name}}<a></li>
   {% endfor %}
 
 
 </div>
 
 <div id='events'>
+
   {% for event in friend.events %}
   <li>
     {{ event.date }}
