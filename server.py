@@ -109,23 +109,23 @@ def add_friend():
 @app.route('/friends/<friend_id>') 
 def show_friend_details(friend_id):
     """display details about specific friend"""
-    # friend = crud.get_friend_by_friend_id(friend_id)
 
     friend = crud.get_friend_by_friend_id(friend_id)
 
+    session['friend_id'] = friend_id
+
     return render_template('friend_details.html', friend = friend)
 
-@app.route('/events/add-event')
-def add_event_form():
+@app.route('/events/add-event/<friend_id>')
+def add_event_form(friend_id):
     types = crud.get_event_types()
-    user_id = session['user_id']
-    friends = crud.get_friends_by_user_id(user_id)
-    return render_template('add_event.html', types = types, friends = friends)
+    friend = crud.get_friend_by_friend_id(friend_id)
+    return render_template('add_event.html', types = types, friend = friend)
 
 @app.route('/events', methods=['POST'])
 def add_event():
 
-    friend_id = request.form.get('friend')
+    friend_id = session['friend_id']
     friend = crud.get_friend_by_friend_id(friend_id)
 
     event_key = request.form.get('event_type')

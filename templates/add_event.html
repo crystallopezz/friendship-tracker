@@ -3,19 +3,19 @@
 {% block title %}Add Event{% endblock %}
 
 {% block body %}
-  <h1>Add New Event</h1>
+  <h1>Add New Event with {{ friend.full_name }}</h1>
 
   <div>
     <form action="/events" method="POST">
 
-      <p>
+      {# <p>
         Friend: 
         <select name='friend'>
           {% for friend in friends %}
           <option value={{friend.friend_id}}>{{friend.full_name}}</option>
           {% endfor %}
         </select>
-      </p>
+      </p> #}
 
       <p>
         Event Type: 
