@@ -1,13 +1,13 @@
 {% extends 'base.html' %}
 
-{% block title %}Login{% endblock %}
+{% block title %}Create New Account{% endblock %}
 
 {% block body %}
   <h1>Welcome!</h1>
 
   <div>
-    <h2>Login</h2>
-    <form action="/users" method="POST">
+    <h2>Create New Account</h2>
+    <form action="/users/new" method="POST">
       <p>
         Email <input type="text" name="email">
       </p>
@@ -20,7 +20,5 @@
         <input type="submit">
       </p>
   </div>
-
-  <div><a href="/create-account">Create new account</a></div>
 
 {%endblock%}

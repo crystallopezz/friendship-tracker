@@ -24,6 +24,11 @@ def show_login():
     """Show app's login page"""
     return render_template("login.html")
 
+@app.route('/create-account')
+def new_account_form(): 
+    """show new account form"""
+    return render_template("new_account.html")
+
 @app.route('/users', methods=['POST'])
 def login():
     """look for user by email and password"""
@@ -41,6 +46,22 @@ def login():
     # TODO turn in to flash message
     # else: 
     #     return alert('Email or password is incorrect.')
+
+@app.route('/users/new', methods=['POST'])
+def add_new_user():
+    """create new user"""
+    email = request.form.get('email')
+    pw=request.form.get('password')
+
+    # TODO
+    # if crud.get_user_by_email(email): 
+    #     flash user with that email already exists
+
+    crud.create_user(email, pw)
+
+    return redirect("/")
+    # TODO: create flash to say the account was created
+
 
 @app.route('/users/<user_id>/friends')
 def show_users_friends_list(user_id):

@@ -142,6 +142,23 @@ class Event(db.Model):
     def __repr__(self):
       return f'<Event event_id={self.event_id}>'
 
+# class Reminder(db.Model):
+#     __tablename__ = 'reminders'
+
+#     reminder_id = db.Column(db.Integer, 
+#                             primary_key=True, 
+#                             autoincrement=True)
+#     friend_id = db.Column(db.Integer, 
+#                           db.ForeignKey('friends.friend_id'),
+#                           nullable=False)
+
+#     reminder_type = db.Column(db.String, 
+#                               db.ForeignKey(REMINDER TABLE), 
+#                               nullable=False)
+#     is_recurring = db.Column(db.Boolean, 
+#                              nullable = False)
+    
+
 if __name__ == '__main__':
 
     connect_to_db(app)
