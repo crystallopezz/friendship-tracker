@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Reminder{% endblock %}
+
+{% block body %}
+  <h1>Create Reminder</h1>
+
+  <div>
+    <form action="/reminders" method="POST">
+
+      <p>
+        Reminder Name: <input type="text" name="reminder_name" required>
+      </p>
+
+      <p>
+        When do you want us to remind you?: <input type="datetime-local" name="reminder_time" required>
+      </p>
+
+      <p>
+        <input type="submit">
+      </p>
+  </div>
+
+{%endblock%}

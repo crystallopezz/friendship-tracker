@@ -1,4 +1,4 @@
-from model import db, connect_to_db, User, Friend_type, Friend, Social_type, Social_media, Event_type, Event, app
+from model import db, connect_to_db, User, Friend_type, Friend, Social_type, Social_media, Event_type, Event, app, Reminder
 
 def create_user(email, password):
     """Create and return a new user"""
@@ -103,7 +103,14 @@ def get_friend_types():
 def get_friend_type_by_key(friend_key):
     return Friend_type.query.get(friend_key)
 
+def create_reminder(user, reminder_name, date):
+    reminder = Reminder(user=user, reminder_name=reminder_name, date=date)
+
+    db.session.add(reminder)
+    db.session.commit()
+
+    return reminder
+
 if __name__ == '__main__':
-    from flask import Flask
 
     connect_to_db(app)

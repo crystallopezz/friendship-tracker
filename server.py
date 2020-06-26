@@ -1,5 +1,5 @@
 from flask import (Flask, render_template, request, flash, session, redirect)
-from model import connect_to_db, app
+from model import connect_to_db, app, crontab
 import crud
 from jinja2 import StrictUndefined
 import os
@@ -7,6 +7,7 @@ from twilio.rest import Client
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
+
 
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
@@ -17,7 +18,6 @@ messaging_sid = os.environ['messaging_service_sid']
 cloud_name = os.environ['cloud_name']
 cloud_api_key = os.environ['cloud_api_key']
 cloud_api_secret = os.environ['cloud_api_secret']
-
 
 @app.route('/')
 def show_login():
@@ -94,7 +94,6 @@ def add_friend():
     date_met = request.form.get('met')
 
     photo_uploaded = request.files['pic']
-    print(photo_uploaded)
     cloudinary_upload = cloudinary.uploader.upload(photo_uploaded)
     photo_url = cloudinary_upload['url']
 
@@ -159,6 +158,23 @@ def send_text():
     print(message.sid)
 
     return redirect('/texts/send-text')
+
+@app.route('/reminders/add-reminder')
+def reminder_form():
+    """show reminder form"""
+    return render_template('create_reminder.html')
+
+@app.route('/reminders', methods=['POST'])
+def create_reminder():
+    reminder_name = request.form.get('reminder_name')
+    date = request.form.get('reminder_time')
+
+    user_id = session['user_id']
+    user = crud.get_user_by_id(user_id)
+
+    crud.create_reminder(user, reminder_name, date)
+
+    return redirect(f'/users/{user_id}/friends')
 
 
 if __name__ == '__main__':

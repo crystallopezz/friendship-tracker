@@ -1,7 +1,13 @@
 from flask_sqlalchemy import SQLAlchemy
 from flask import Flask
+from flask_crontab import Crontab
+from pathlib import Path
+import time
 
-app = app = Flask(__name__)
+
+app = Flask(__name__)
+crontab = Crontab(app)
+print(crontab)
 
 db = SQLAlchemy()
 
@@ -15,6 +21,17 @@ def connect_to_db(flask_app, db_uri='postgresql:///friendshiptracker', echo=True
 
     print('Connected to the db!')
 
+def do_something():
+    # Path(f'/home/vagrant/src/friendship_tracker/{time.time()}').touch()
+    
+    return
+
+@crontab.job()
+def my_scheduled_job():
+    do_something()
+    return
+
+
 class User(db.Model):
     __tablename__ = 'users'
 
@@ -27,6 +44,7 @@ class User(db.Model):
                         nullable=False)
 
     #friends = list of friend objects that the user has
+    #reminders = list of reminders
 
     def __repr__(self):
         return f'<User user_id={self.user_id} email={self.email}>'
@@ -142,22 +160,22 @@ class Event(db.Model):
     def __repr__(self):
       return f'<Event event_id={self.event_id}>'
 
-# class Reminder(db.Model):
-#     __tablename__ = 'reminders'
+class Reminder(db.Model):
+    __tablename__ = 'reminders'
 
-#     reminder_id = db.Column(db.Integer, 
-#                             primary_key=True, 
-#                             autoincrement=True)
-#     friend_id = db.Column(db.Integer, 
-#                           db.ForeignKey('friends.friend_id'),
-#                           nullable=False)
+    reminder_id = db.Column(db.Integer, 
+                            primary_key=True, 
+                            autoincrement=True)
+    user_id = db.Column(db.Integer, 
+                        db.ForeignKey('users.user_id'),
+                        nullable=False)
+    reminder_name = db.Column(db.String(45), 
+                            nullable=False)
+    date = db.Column(db.DateTime,
+                     nullable=False)
+    sent = db.Column(db.DateTime)
 
-#     reminder_type = db.Column(db.String, 
-#                               db.ForeignKey(REMINDER TABLE), 
-#                               nullable=False)
-#     is_recurring = db.Column(db.Boolean, 
-#                              nullable = False)
-    
+    user = db.relationship('User', backref='reminders')   
 
 if __name__ == '__main__':
 
