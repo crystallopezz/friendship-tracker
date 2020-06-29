@@ -1,5 +1,5 @@
 from flask import (Flask, render_template, request, flash, session, redirect)
-from model import connect_to_db, app, crontab
+from model import connect_to_db, app
 import crud
 from jinja2 import StrictUndefined
 import os
@@ -7,17 +7,17 @@ from twilio.rest import Client
 import cloudinary
 import cloudinary.uploader
 import cloudinary.api
-
+from flask_crontab import Crontab
 
 app.secret_key = "dev"
 app.jinja_env.undefined = StrictUndefined
 
-account_sid = os.environ['account_sid']
-auth_token = os.environ['auth_token']
-messaging_sid = os.environ['messaging_service_sid']
-cloud_name = os.environ['cloud_name']
-cloud_api_key = os.environ['cloud_api_key']
-cloud_api_secret = os.environ['cloud_api_secret']
+account_sid = os.environ.get('account_sid')
+auth_token = os.environ.get('auth_token')
+messaging_sid = os.environ.get('messaging_service_sid')
+cloud_name = os.environ.get('cloud_name')
+cloud_api_key = os.environ.get('cloud_api_key')
+cloud_api_secret = os.environ.get('cloud_api_secret')
 
 @app.route('/')
 def show_login():
@@ -176,7 +176,7 @@ def create_reminder():
 
     return redirect(f'/users/{user_id}/friends')
 
-
+crontab = Crontab()
 if __name__ == '__main__':
     connect_to_db(app)
     app.run(host='0.0.0.0', debug=True)

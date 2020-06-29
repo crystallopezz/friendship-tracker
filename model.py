@@ -3,11 +3,17 @@ from flask import Flask
 from flask_crontab import Crontab
 from pathlib import Path
 import time
+import arrow
+import datetime
+
+import logging
+
+logging.basicConfig(filename='/home/vagrant/src/friendship_tracker/project.log',level=logging.DEBUG)
+logger = logging.getLogger(__name__)
+
 
 
 app = Flask(__name__)
-crontab = Crontab(app)
-print(crontab)
 
 db = SQLAlchemy()
 
@@ -20,16 +26,7 @@ def connect_to_db(flask_app, db_uri='postgresql:///friendshiptracker', echo=True
     db.init_app(flask_app)
 
     print('Connected to the db!')
-
-def do_something():
-    # Path(f'/home/vagrant/src/friendship_tracker/{time.time()}').touch()
-    
-    return
-
-@crontab.job()
-def my_scheduled_job():
-    do_something()
-    return
+    logger.info("connected to db")
 
 
 class User(db.Model):
@@ -178,5 +175,4 @@ class Reminder(db.Model):
     user = db.relationship('User', backref='reminders')   
 
 if __name__ == '__main__':
-
     connect_to_db(app)
