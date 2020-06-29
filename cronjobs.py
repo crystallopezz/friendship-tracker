@@ -1,15 +1,53 @@
 from model import connect_to_db, Reminder, app
 import logging
-from server import crontab
+from server import crontab, account_sid, auth_token, messaging_sid
 from pathlib import Path
 import time
 import os
+import arrow
+from twilio.rest import Client
 
 logging.basicConfig(filename='/home/vagrant/src/friendship_tracker/project.log',level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 connect_to_db(app)
 crontab.init_app(app)
 logger.debug(crontab.app.config['SQLALCHEMY_DATABASE_URI'])
+
+def check_reminders():
+    logger.debug("starting job")
+    to_send = Reminder.query.filter(Reminder.sent == None).all()
+    now = arrow.now('US/Pacific')
+    for reminder in to_send:
+        date = arrow.get(reminder.date)
+        if date <= now:
+
+            client = Client(account_sid, auth_token)
+
+            message = client.messages \
+                .create(
+                     body=f'Reminder to: {reminder.reminder_name}',
+                     from_="+12058469126",
+                     to="+14159489652"
+                )
+
+                # reminder.sent = arrow.now('US/Pacific').datetime
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 def do_something_else(to_be_sent):
   for item in to_be_sent:
@@ -37,5 +75,5 @@ def do_something():
 def my_scheduled_job():
     logger.debug("starting job")
     logger.debug(os.environ)
-    do_something()
+    check_reminders()
     return

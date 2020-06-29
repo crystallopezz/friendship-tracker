@@ -5,46 +5,62 @@
 {% block body %}
   <h1>Add New Friend</h1>
 
-  <div>
+  <div class="form" id="add-friend">
     <form enctype="multipart/form-data" action="/friends" method="POST">
-      <p>
-        Full Name: <input type="text" name="name" required>
-      </p>
+      <div class="form-entry" id="friend-name">
+        <p>
+          Full Name: <input type="text" name="name" required>
+        </p>
+      </div>
 
-      <p>
-        Birthday: <input type="date" name="bday" required>
-      </p>
+      <div class="form-entry" id="friend-bday">
+        <p>
+          Birthday: <input type="date" name="bday" required>
+        </p>
+      </div>
 
-      <p>
-        When did you meet? (if you don't remember the exact day, just put the 
-        first of the month or the first of the year): 
-        <input type="date" name="met" required>
-      </p>
+      <div class="form-entry" id="friend-met">
+        <p>
+          When did you meet? (if you don't remember the exact day, just put the 
+          first of the month or the first of the year): 
+          <input type="date" name="met" required>
+        </p>
+      </div>
 
-      <p>
-        Picture: <input id="pic" type="file" name="pic">
-      </p>
+      <div class="form-entry" id="friend-pic">
+        <p>
+          Picture: <input id="pic" type="file" name="pic">
+        </p>
+      </div>
 
-      <p>
-        Likes: <input type="text" name="likes">
-      </p>
+      <div class="form-entry" id="friend-likes">
+        <p>
+          Likes: <input type="text" name="likes">
+        </p>
+      </div>
 
-      <p>
-        Dislikes: <input type="text" name="dislikes">
-      </p>
+      <div class="form-entry" id="friend-dislikes">
+        <p>
+          Dislikes: <input type="text" name="dislikes">
+        </p>
+      </div>
 
-      <p>
-        Friend type: 
-        <select name='friend_type'>
-          {% for type in types %}
-          <option value={{type.friend_key}}>{{type.name}}</option>
-          {% endfor %}
-        </select>
-      </p>      
+      <div class="form-entry" id="friend-type">
+        <p>
+          Friend type: 
+          <select name='friend_type'>
+            {% for type in types %}
+            <option value={{type.friend_key}}>{{type.name}}</option>
+            {% endfor %}
+          </select>
+        </p> 
+      </div>     
 
-      <p>
-        <input type="submit">
-      </p>
+      <div class="submit-button" id="friend-submit">
+        <p>
+          <input type="submit">
+        </p>
+      </div>
   </div>
 
 {%endblock%}

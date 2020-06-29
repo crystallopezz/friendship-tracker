@@ -5,19 +5,25 @@
 {% block body %}
   <h1>Send a Text</h1>
 
-  <div>
+  <div class="form" id="send-text">
     <form action="/texts" method="POST">
-      <p>
-        Phone Number: <input type="text" name="phone_number" required>
-      </p>
+      <div class="form-entry" id="text-number">
+        <p>
+          Phone Number: <input type="text" name="phone_number" required>
+        </p>
+      </div>
 
-      <p>
-        Message: <input type="text" name="message">
-      </p>
+      <div class="form-entry" id="text-msg">
+        <p>
+          Message: <input type="text" name="message">
+        </p>
+      </div>
 
-      <p>
-        <input type="submit">
-      </p>
+      <div class="submit-button" id="login-submit">
+        <p>
+          <input type="submit">
+        </p>
+      </div>
   </div>
 
 {%endblock%}

@@ -5,20 +5,26 @@
 {% block body %}
   <h1>Create Reminder</h1>
 
-  <div>
+  <div class="form" id="add-reminder">
     <form action="/reminders" method="POST">
 
-      <p>
-        Reminder Name: <input type="text" name="reminder_name" required>
-      </p>
+      <div class="form-entry" id="reminder-name">
+        <p>
+          Reminder Name: <input type="text" name="reminder_name" required>
+        </p>
+      </div>
 
-      <p>
-        When do you want us to remind you?: <input type="datetime-local" name="reminder_time" required>
-      </p>
+      <div class="form-entry" id="reminder-date">
+        <p>
+          When do you want us to remind you?: <input type="datetime-local" name="reminder_time" required>
+        </p>
+      </div>
 
-      <p>
-        <input type="submit">
-      </p>
+      <div class="submit-button" id="friend-submit">
+        <p>
+          <input type="submit">
+        </p>
+      </div>
   </div>
 
 {%endblock%}

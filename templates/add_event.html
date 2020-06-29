@@ -5,7 +5,7 @@
 {% block body %}
   <h1>Add New Event with {{ friend.full_name }}</h1>
 
-  <div>
+  <div class="form" id="add-event">
     <form action="/events" method="POST">
 
       {# <p>
@@ -16,27 +16,34 @@
           {% endfor %}
         </select>
       </p> #}
+      <div class="form-entry" id="event-type">
+        <p>
+          Event Type: 
+          <select name='event_type'>
+            {% for type in types %}
+            <option value={{type.event_key}}>{{type.event_type}}</option>
+            {% endfor %}
+          </select>
+        </p>
+      </div>
+      
+      <div class="form-entry" id="event-details">
+        <p>
+          Details: <input type="text" name="details" required>
+        </p>
+      </div>
 
-      <p>
-        Event Type: 
-        <select name='event_type'>
-          {% for type in types %}
-          <option value={{type.event_key}}>{{type.event_type}}</option>
-          {% endfor %}
-        </select>
-      </p>
+      <div class="form-entry" id="event-date">
+        <p>
+          Date: <input type="date" name="event_date" required>
+        </p>
+      </div>
 
-      <p>
-        Details: <input type="text" name="details" required>
-      </p>
-
-      <p>
-        Date: <input type="date" name="event_date" required>
-      </p>
-
-      <p>
-        <input type="submit">
-      </p>
+      <div class="submit-button" id="event-submit">
+        <p>
+          <input type="submit">
+        </p>
+      </div>
   </div>
 
 {%endblock%}
