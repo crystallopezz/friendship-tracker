@@ -3,15 +3,10 @@
 
 {%block body%}
 
-<div class="header" id="friend-info-head">
-  <h1>{{ friend.full_name }}</h1>
-</div>
+<h1>{{ friend.full_name }}</h1>
 
-<div class="friend-info" id="pic">
-  <img src={{friend.picture}}>
-</div>
-
-<div class="friend-info" id='info'>
+<div class="col-4">
+  <img src={{friend.picture}} class="img-thumbnail">
 
   <li>Birthday: {{friend.bday}}</li>
   <li>When we met: {{friend.date_met}}</li>
@@ -22,28 +17,26 @@
   {% for social in friend.social_medias %}
     <li><a href={{social.url}}>{{ social.stype.name}}<a></li>
   {% endfor %}
-
-
 </div>
 
-<div class="friend-info" id='events'>
 
-  {% for event in friend.events %}
+
+
+
+
+
+<div class="col-8">
+{% for event in friend.events %}
   <li>
     {{ event.date }}
     {{ event.etype.event_type }}
     {{ event.details }}
   </li>
-  {% endfor %}
-</ul>
-
-<div class="form-link" id="event-link">
-  <a href="/events/add-event/{{ friend.friend_id }}">Add New Event</a>
+{% endfor %}
 </div>
 
-<div class="form-link" id="text-link">
-  <a href="/texts/send-text">Send your friend a text</a>
-</div>
+<div><a href="/events/add-event/{{ friend.friend_id }}">Add New Event</a></div>
 
+<div><a href="/texts/send-text">Send your friend a text</a></div>
 
 {% endblock %}

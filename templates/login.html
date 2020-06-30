@@ -3,35 +3,27 @@
 {% block title %}Login{% endblock %}
 
 {% block body %}
-  <h1>Welcome!</h1>
 
-  <div class="form" id="login">
-    <div class="header2" id="login-head">
-      <h2>Login</h2>
-    </div>
+<h1>Welcome!</h1>
 
-    <form action="/users" method="POST">
-      <div class="form-entry" id="user-email">
-        <p>
-          Email <input type="text" name="email">
-        </p>
-     </div>
+<h2>Login</h2>
 
-      <div class="form-entry" id="user-pw">
-        <p>
-          Password <input type="text" name="password">
-        </p>
-      </div>
-
-      <div class="submit-button" id="login-submit">
-        <p>
-          <input type="submit">
-        </p>
-      </div>
+<form action="/users" method="POST">
+  <div class="form-group">
+    <label for="user-email">Email</label>
+    <input type="text" class="form-control" id="user-email" name="email">
   </div>
 
-  <div class="form-link" id="create-acct-link">
-    <a href="/create-account">Create new account</a>
-  </div>
+  <div class="form-group">
+    <label for="user-pw">Password</label>
+    <input type="text" class="form-control" id="user-pw" name="password">
+  </div>  
+
+
+  <button type="submit" class="btn btn-success">Login</button>
+
+  or
+
+  <a href="/create-account">Create new account</a>
 
 {%endblock%}

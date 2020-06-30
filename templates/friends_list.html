@@ -3,26 +3,22 @@
 
 {%block body%}
 
-<div class="form-link" id="add-friend-link">
-  <a href="/friends/add-friend">Add New Friend</a>
-</div>
+<div><a href="/friends/add-friend">Add New Friend</a></div>
+<div><a href="/reminders/add-reminder">Create a Reminder</a></div>
 
-<div class="form-link" id="reminder-link">
-  <a href="/reminders/add-reminder">Create a Reminder</a>
-</div>
-
-<div class="friends-list" id="friends-list">
-  <ul>
-    {% for friend in friends %}
-    <li>
-      <div class="friend" id="friend-info-link">
+{% for friend in friends %}
+<div class="card mb-3">
+  <div class="row no-gutters">
+    <div class="col-md-8">
+      <img src={{friend.picture}} class="card-img">
+    </div>
+    <div class="col-md-2" style="height: 1000; width: 10000">
+      <h5>
         <a href='/friends/{{ friend.friend_id }}'>{{ friend.full_name }}</a>
-      </div>
-      <div class="friend-pic" id="friend-pic">
-        <img src={{friend.picture}}>
-      </div>
-    </li>
-    {% endfor %}
-  </ul>
+      </h5>
+    </div>
+  </div>
 </div>
+{% endfor %}
+
 {% endblock %}
