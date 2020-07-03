@@ -57,8 +57,8 @@ def get_friends_by_user_id(user_id):
     friends = user.friends
     return friends
 
-def create_social_type(social_type, name):
-    social = Social_type(social_type=social_type, name=name)
+def create_social_type(social_type, name, logo):
+    social = Social_type(social_type=social_type, name=name, logo=logo)
 
     db.session.add(social)
     db.session.commit()

@@ -3,22 +3,50 @@
 
 {%block body%}
 
-<div><a href="/friends/add-friend">Add New Friend</a></div>
-<div><a href="/reminders/add-reminder">Create a Reminder</a></div>
+<nav class="navbar navbar-expand sticky-top navbar-dark" style="background-color: #42CF5E">
+  <a class="navbar-brand">FT</a>
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="/friends/add-friend">Add New Friend</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/reminders/add-reminder">Create a Reminder</a>
+    </li>
+  </ul>
+</nav>
+
+<div class='container-fluid pt-3'>
 
 {% for friend in friends %}
-<div class="card mb-3">
+
+<div class="card mb-3" style="max-width: 500px;">
   <div class="row no-gutters">
-    <div class="col-md-8">
-      <img src={{friend.picture}} class="card-img">
+    <div class="col-md-4">
+      <img src="{{friend.picture}}" class="card-img">
     </div>
-    <div class="col-md-2" style="height: 1000; width: 10000">
-      <h5>
-        <a href='/friends/{{ friend.friend_id }}'>{{ friend.full_name }}</a>
-      </h5>
+    <div class="col-md-4">
+      <div class="card-body">
+        <h5 class="card-title"><a href='/friends/{{ friend.friend_id }}'>{{ friend.full_name }}</a></h5>
+      </div>
     </div>
   </div>
 </div>
+
+
+{# <div class="row no-gutters">
+
+  <div class="column">
+    <a href='/friends/{{ friend.friend_id }}'>{{ friend.full_name }}</a>
+  </div>
+
+  <div class="column">
+    <img class="img-thumbnail" id="{{ friend.full_name }}" src={{friend.picture}}>
+  </div>
+
+</div> #}
 {% endfor %}
 
+</div>
+
 {% endblock %}
+

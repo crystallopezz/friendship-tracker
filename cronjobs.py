@@ -13,14 +13,17 @@ connect_to_db(app)
 crontab.init_app(app)
 logger.debug(crontab.app.config['SQLALCHEMY_DATABASE_URI'])
 
+logger.debug(account_sid)
 def check_reminders():
+    logger.debug(account_sid)
     logger.debug("starting job")
     to_send = Reminder.query.filter(Reminder.sent == None).all()
+    logger.debug(to_send)
     now = arrow.now('US/Pacific')
     for reminder in to_send:
         date = arrow.get(reminder.date)
         if date <= now:
-
+            logger.debug(f'reminder_id: {reminder.reminder_id}')
             client = Client(account_sid, auth_token)
 
             message = client.messages \
@@ -29,7 +32,6 @@ def check_reminders():
                      from_="+12058469126",
                      to="+14159489652"
                 )
-
                 # reminder.sent = arrow.now('US/Pacific').datetime
 
 

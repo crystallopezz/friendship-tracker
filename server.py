@@ -110,10 +110,12 @@ def show_friend_details(friend_id):
     """display details about specific friend"""
 
     friend = crud.get_friend_by_friend_id(friend_id)
+    bday = friend.bday.strftime('%B, %d, %Y')
+    date_met = friend.date_met.strftime('%B, %d, %Y')
 
     session['friend_id'] = friend_id
 
-    return render_template('friend_details.html', friend = friend)
+    return render_template('friend_details.html', friend = friend, bday=bday, date_met=date_met)
 
 @app.route('/events/add-event/<friend_id>')
 def add_event_form(friend_id):

@@ -48,9 +48,10 @@ with open('data/social_type.json') as stypes:
 for stype in stype_data:
 
     social_type = stype['social_type']
-    name = stype["name"]
+    name = stype['name']
+    logo = stype['logo']
 
-    db_stype = crud.create_social_type(social_type, name)
+    db_stype = crud.create_social_type(social_type, name, logo)
 
     social_types_in_db.append(db_stype)
 

@@ -2,41 +2,81 @@
 {% block title %}{{ friend.full_name }}{% endblock %}
 
 {%block body%}
+<nav class="navbar navbar-expand sticky-top navbar-dark" style="background-color: #42CF5E">
+  <a class="navbar-brand">FT</a>
+  <ul class="navbar-nav mr-auto">
+    <li class="nav-item">
+      <a class="nav-link" href="/events/add-event/{{ friend.friend_id }}">Add New Event</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" href="/texts/send-text">Send your friend a text</a>
+    </li>
+  </ul>
+</nav>
 
-<h1>{{ friend.full_name }}</h1>
+<div class="container-fluid">
+  <div class=row>
+    <div class="col-3">
+      <h1 class="text-center" id="friend-name">{{ friend.full_name }}</h1>
+    </div>
+    <div class="col">
+      <h2 class="friend-info" id="timeline-head">Event Timeline</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3" id="friend-info-col">
+      <div class="text-center">
+        <img src="{{friend.picture}}" class="img-thumbnail">
+      </div>
+      <div class="container" id="friend-info-list">
+        <li><b>Birthday:</b> {{bday}}</li>
+        <li><b>When we met:</b> {{date_met}}</li>
+        <li><b>Friend type:</b> {{friend.ftype.name}}</li>
+        <li><b>Likes:</b> {{friend.likes}}</li>
+        <li><b>Dislikes:</b> {{friend.dislikes}}</li>
+      {% for social in friend.social_medias %}
+        <li><a href="{{social.url}}"><img class="stype-pic"src="{{ social.stype.logo }}"></a></li>
+      {% endfor %}
+      </div>
+    </div>
+    <div class="col">
+      <div class="container" style="background-color: #C5E8CC">
+        {% for event in friend.events %}
+          <div class="container py-3">
+            <div class="row">
+              <div class="col-2">{{ event.date.strftime('%B, %d, %Y') }}
+              </div>
+              <div class="col-2">
+              {{ event.etype.event_type }}
+              </div>
+              <div class="col">
+              {{ event.details }}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
 
-<div class="col-4">
+{# <div class="container">
+  <h1 class="friend-info" id="{{ friend.full_name }}">{{ friend.full_name }}</h1>
   <img src={{friend.picture}} class="img-thumbnail">
-
   <li>Birthday: {{friend.bday}}</li>
   <li>When we met: {{friend.date_met}}</li>
   <li>Friend type: {{friend.ftype.name}}</li>
   <li>Likes: {{friend.likes}}</li>
-  <li>Dislikes: {{friend.dislikes}}</li>
-
-  {% for social in friend.social_medias %}
-    <li><a href={{social.url}}>{{ social.stype.name}}<a></li>
-  {% endfor %}
-</div>
-
-
-
-
-
-
-
-<div class="col-8">
-{% for event in friend.events %}
-  <li>
-    {{ event.date }}
-    {{ event.etype.event_type }}
-    {{ event.details }}
-  </li>
-{% endfor %}
-</div>
-
-<div><a href="/events/add-event/{{ friend.friend_id }}">Add New Event</a></div>
-
-<div><a href="/texts/send-text">Send your friend a text</a></div>
-
+      <li>Dislikes: {{friend.dislikes}}</li>
+      {% for social in friend.social_medias %}
+        <li><a href={{social.url}}>{{ social.stype.name}}<a></li>
+      {% endfor %}
+      {% for event in friend.events %}
+        <li>
+          {{ event.date }}
+          {{ event.etype.event_type }}
+          {{ event.details }}
+        </li>
+      {% endfor %}
+</div> #}
 {% endblock %}

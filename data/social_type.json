@@ -1,18 +1,22 @@
 [
     {
         "social_type": "insta",
-        "name": "instagram"
+        "name": "instagram",
+        "logo": "https://res.cloudinary.com/db7jklsoo/image/upload/v1593714877/iconfinder_SocialMedia_Instagram-Outline_2959748_zihv6q.png"
     },
     {
         "social_type": "twit",
-        "name": "twitter"
+        "name": "twitter",
+        "logo": "https://res.cloudinary.com/db7jklsoo/image/upload/v1593714877/iconfinder_SocialMedia_Twitter-Outline_2959740_iypqtu.png"
     },
     {
         "social_type": "fb",
-        "name": "facebook"
+        "name": "facebook",
+        "logo": "https://res.cloudinary.com/db7jklsoo/image/upload/v1593714877/iconfinder_SocialMedia_Facebook-Outline_2959749_ctbhva.png"
     },
     {
         "social_type": "lin",
-        "name": "linkedin"
+        "name": "linkedin",
+        "logo": "https://res.cloudinary.com/db7jklsoo/image/upload/v1593715307/iconfinder_SocialMedia_LinkedIn-Outline_2959747_ydyscb.png"
     }
 ]

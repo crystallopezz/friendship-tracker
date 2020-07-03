@@ -3,47 +3,43 @@
 {% block title %}Add Event{% endblock %}
 
 {% block body %}
-  <h1>Add New Event with {{ friend.full_name }}</h1>
 
-  <div class="form" id="add-event">
-    <form action="/events" method="POST">
+<div class="container-fluid" id="add-event">
+  <form class="form" action="/events" method="POST">
 
-      {# <p>
-        Friend: 
-        <select name='friend'>
-          {% for friend in friends %}
-          <option value={{friend.friend_id}}>{{friend.full_name}}</option>
-          {% endfor %}
-        </select>
-      </p> #}
-      <div class="form-entry" id="event-type">
-        <p>
-          Event Type: 
-          <select name='event_type'>
+    <div class="title mb-4">
+      <h1>Add Event with {{ friend.full_name }}</h1>
+    </div>
+
+    <div class="event-form">
+
+      <div class="form-group row">
+
+        <div class="input-name col p-0">Event Type:</div>
+
+        <div class="col-6 mr-4">
+          <select class="form-control" name='event_type'>
             {% for type in types %}
             <option value={{type.event_key}}>{{type.event_type}}</option>
             {% endfor %}
           </select>
-        </p>
-      </div>
-      
-      <div class="form-entry" id="event-details">
-        <p>
-          Details: <input type="text" name="details" required>
-        </p>
+        </div>
+
       </div>
 
-      <div class="form-entry" id="event-date">
-        <p>
-          Date: <input type="date" name="event_date" required>
-        </p>
+      <div class="form-group row">
+
+        <div class="input-name col p-0">Date:</div>
+
+        <div class="col-6 mr-4"><input class="form-control" type="date" name="event_date" required></div>
+
       </div>
 
-      <div class="submit-button" id="event-submit">
-        <p>
-          <input type="submit">
-        </p>
-      </div>
-  </div>
+    </div>
+
+    <button type="submit" class="btn btn-success mt-2">Create Event!</button>
+
+  </form>
+</div>
 
 {%endblock%}

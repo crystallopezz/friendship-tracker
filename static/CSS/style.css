@@ -1,4 +1,67 @@
+html, body, .container-fluid, h2 {
+    height: 100%;
+}
+
+.form {
+    max-width: 600px;
+    padding: 15px;
+    margin: auto;
+    color: white;
+    text-align: center;
+}
+
+
+#user-email, #user-pw {
+    max- width: 600px;
+}
+
+.input-name {
+    text-align: right;
+}
+
+.form-control {
+    max-width: 400px;
+}
+
+#login, #add-friend, #add-reminder, #add-event {
+    background-color: #42CF5E;
+    display: flex;
+}
+
+
+h1, h2, .subtitle, .navbar {
+    font-family: 'Montserrat';
+    color: white;
+}
+
+h1 {
+    
+    font-size: 48px;
+    
+}
+
+.subtitle {
+    font-size: 15px;
+}
+
+.img-thumbnail {
+    height: 200px;
+    width: 200px;
+}
+
 .card {
-    width: 200;
-    height: 200;
+    border: 0px;
+}
+
+#friend-name, #timeline-head {
+    color: #157F1F;
+}
+
+.stype-pic {
+    height: 25px;
+    width: 25px;
+}
+
+#friend-info-list{
+    font-family: 'Roboto';
 }

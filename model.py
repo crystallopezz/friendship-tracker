@@ -96,6 +96,8 @@ class Social_type(db.Model):
                             primary_key=True)
     name = db.Column(db.String,
                      nullable=False)
+    logo = db.Column(db.String, 
+                     nullable=False)
 
     #social_medias = list of social_media accts w/ this social_type
 
