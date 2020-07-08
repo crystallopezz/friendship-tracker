@@ -3,7 +3,33 @@
 {% block title %}Send A Text{% endblock %}
 
 {% block body %}
-  <h1>Send a Text</h1>
+
+<div class="container-fluid" id="send-text">
+  <form class="form" action="/texts" method="POST">
+    <div class="title mb-4" id="send-text-title">
+      <h1>Send a Text</h1>
+    </div>
+
+    <div class="text-form">
+      <div class="form-group row">
+        <div class="input-name col p-0">Phone Number:</div>
+        <div class="col-6 mr-4"><input class="form-control" type="text" name="phone_number" required></div>
+      </div>
+
+      <div class="form-group row">
+        <div class="input-name col p-0">Message:</div>
+        <div class="col-6 mr-4"><input class="form-control" type="text" name="message"></div>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-success mt-2">Send Text!</button>
+  </form>
+</div>
+
+
+
+
+
+{#   
 
   <div class="form" id="send-text">
     <form action="/texts" method="POST">
@@ -25,5 +51,5 @@
         </p>
       </div>
   </div>
-
+ #}
 {%endblock%}

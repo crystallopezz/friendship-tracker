@@ -6,7 +6,8 @@
         "picture": "/static/kainat.JPG",
         "likes": "briyani, reality tv, travelling",
         "dislikes": "laziness, sweet meat, crowded airplanes",
-        "ftype": "fam"
+        "ftype": "fam",
+        "phone": "+14159489652"
     },
     {
         "full_name": "Shelley",
@@ -15,7 +16,8 @@
         "picture": "/static/shell.JPG",
         "likes": "bollywood movies, photography, spending time with family",
         "dislikes": "complainers, lack of accountability, the color green",
-        "ftype": "bff"
+        "ftype": "bff",
+        "phone": "+14159489652"
     },
     {
         "full_name": "Roy",
@@ -24,7 +26,8 @@
         "picture": "/static/Roy.jpg",
         "likes": "tech gadgets, calpico, hanging out with friends",
         "dislikes": "gloomy weather, oversleeping, being stuck inside",
-        "ftype": "gf"
+        "ftype": "gf",
+        "phone": "+14159489652"
     },
     {
         "full_name": "Abiola",
@@ -33,6 +36,7 @@
         "picture": "/static/abiola.JPG",
         "likes": "being a plant mom, drama videos, podcasts",
         "dislikes": "running, rude people, video games",
-        "ftype": "bff"
+        "ftype": "bff",
+        "phone": "+14159489652"
     }
 ]

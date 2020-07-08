@@ -78,6 +78,7 @@ class Friend(db.Model):
                             db.ForeignKey('friend_types.friend_key'))
     likes = db.Column(db.Text)
     dislikes = db.Column(db.Text)
+    phone = db.Column(db.String)
 
     user = db.relationship('User', backref='friends')
     ftype = db.relationship('Friend_type', backref='friends')

@@ -35,11 +35,11 @@ def create_friend_type(friend_key, name):
     return friend_type
 
 def create_friend(user, ftype, full_name, bday, date_met=None, picture=None, 
-                  likes=None, dislikes=None):
+                  likes=None, dislikes=None, phone=None):
     """create and return a friend"""
 
     friend = Friend(user=user, ftype=ftype, full_name=full_name, bday=bday,
-                  date_met=date_met, picture=picture, likes=likes, dislikes=dislikes)
+                  date_met=date_met, picture=picture, likes=likes, dislikes=dislikes, phone=phone)
 
     db.session.add(friend)
     db.session.commit()
@@ -90,6 +90,13 @@ def create_event(friend, etype, details, date):
     db.session.commit()
 
     return event
+
+# def events_sorted_by_date(friend):
+#     events = friend.events
+#     event_dates =[]
+#     for event in events: 
+#         current_event = (event.date, event.event_id)
+        
 
 def get_event_types():
     return Event_type.query.all()

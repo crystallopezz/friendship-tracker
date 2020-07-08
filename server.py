@@ -1,5 +1,5 @@
 from flask import (Flask, render_template, request, flash, session, redirect)
-from model import connect_to_db, app
+from model import connect_to_db, app, Social_type
 import crud
 from jinja2 import StrictUndefined
 import os
@@ -67,7 +67,7 @@ def add_new_user():
 def show_users_friends_list(user_id):
     """display list of friends"""
     friends = crud.get_friends_by_user_id(user_id)
-    return render_template('friends_list.html', friends = friends)
+    return render_template('friends_list.html', friends = friends, user_id=user_id)
 
 @app.route('/friends/add-friend')
 def add_friend_form():
@@ -99,9 +99,23 @@ def add_friend():
 
     likes = request.form.get('likes')
     dislikes = request.form.get('dislikes')
+    phone = request.form.get('phone_number')
 
-    crud.create_friend(user, ftype, full_name, bday, date_met, photo_url, 
-                  likes, dislikes)
+    friend = crud.create_friend(user, ftype, full_name, bday, date_met, photo_url, 
+                  likes, dislikes, phone)
+
+    twitter = request.form.get('twitter')
+    insta = request.form.get('insta')
+    facebook = request.form.get('facebook')
+
+    if twitter: 
+        crud.create_social_account(friend, Social_type.query.get('twit'), twitter)
+
+    if insta: 
+        crud.create_social_account(friend, Social_type.query.get('insta'), insta)
+
+    if facebook:
+        crud.create_social_account(friend, Social_type.query.get('fb'), facebook)
 
     return redirect(f'/users/{user_id}/friends')
 
@@ -113,9 +127,15 @@ def show_friend_details(friend_id):
     bday = friend.bday.strftime('%B, %d, %Y')
     date_met = friend.date_met.strftime('%B, %d, %Y')
 
-    session['friend_id'] = friend_id
+    events = friend.events[::-1]
+    print(events)
 
-    return render_template('friend_details.html', friend = friend, bday=bday, date_met=date_met)
+    session['friend_id'] = friend_id
+    user_id = session['user_id']
+
+    event_types = crud.get_event_types()
+
+    return render_template('friend_details.html', friend = friend, bday=bday, date_met=date_met, user_id=user_id, events=events, types=event_types)
 
 @app.route('/events/add-event/<friend_id>')
 def add_event_form(friend_id):
@@ -159,7 +179,9 @@ def send_text():
 
     print(message.sid)
 
-    return redirect('/texts/send-text')
+    friend_id=session["friend_id"]
+
+    return redirect(f'/friends/{friend_id}')
 
 @app.route('/reminders/add-reminder')
 def reminder_form():
@@ -174,9 +196,11 @@ def create_reminder():
     user_id = session['user_id']
     user = crud.get_user_by_id(user_id)
 
+    friend_id=session['friend_id']
+
     crud.create_reminder(user, reminder_name, date)
 
-    return redirect(f'/users/{user_id}/friends')
+    return redirect(f'/friends/{friend_id}')
 
 crontab = Crontab()
 if __name__ == '__main__':

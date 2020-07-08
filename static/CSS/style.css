@@ -1,4 +1,4 @@
-html, body, .container-fluid, h2 {
+html, body, h2, #login {
     height: 100%;
 }
 
@@ -6,13 +6,12 @@ html, body, .container-fluid, h2 {
     max-width: 600px;
     padding: 15px;
     margin: auto;
-    color: white;
     text-align: center;
 }
 
 
 #user-email, #user-pw {
-    max- width: 600px;
+    max-width: 600px;
 }
 
 .input-name {
@@ -23,15 +22,20 @@ html, body, .container-fluid, h2 {
     max-width: 400px;
 }
 
-#login, #add-friend, #add-reminder, #add-event {
+#login, #add-friend, #add-reminder, #add-event, #send-text, #new-account {
     background-color: #42CF5E;
     display: flex;
+    color: white;
 }
 
 
 h1, h2, .subtitle, .navbar {
     font-family: 'Montserrat';
     color: white;
+}
+
+.navbar {
+    max-height: 50px;
 }
 
 h1 {
@@ -42,11 +46,6 @@ h1 {
 
 .subtitle {
     font-size: 15px;
-}
-
-.img-thumbnail {
-    height: 200px;
-    width: 200px;
 }
 
 .card {
@@ -64,4 +63,33 @@ h1 {
 
 #friend-info-list{
     font-family: 'Roboto';
+}
+
+.events {
+    border-width: 1px;
+    border-style: solid;
+    border-color: #157F1F;
+}
+
+.info {
+    border-color: #C5E8CC; 
+}
+
+li {
+    list-style: none;
+    margin: 20px;
+}
+
+.social-list, .card {
+    display: inline-block;
+}
+
+.card-title {
+    text-align: center;
+}
+
+.modal-dialogue {
+    margin: 1.75rem auto;
+    position: relative;
+    max-width: 500px;
 }

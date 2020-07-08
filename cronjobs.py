@@ -1,4 +1,4 @@
-from model import connect_to_db, Reminder, app
+from model import connect_to_db, Reminder, app, db
 import logging
 from server import crontab, account_sid, auth_token, messaging_sid
 from pathlib import Path
@@ -32,7 +32,8 @@ def check_reminders():
                      from_="+12058469126",
                      to="+14159489652"
                 )
-                # reminder.sent = arrow.now('US/Pacific').datetime
+            reminder.sent = arrow.now('US/Pacific').datetime
+            db.session.commit()
 
 
 

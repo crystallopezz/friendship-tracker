@@ -88,8 +88,10 @@ for friend in friend_data:
 
     dislikes = friend['dislikes']
 
+    phone = friend['phone']
+
     crud.create_friend(user, ftype, full_name, bday, date_met, picture, 
-                  likes, dislikes)
+                  likes, dislikes, phone)
 
 # seed events table
 with open('data/events.json') as events:

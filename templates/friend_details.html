@@ -3,80 +3,155 @@
 
 {%block body%}
 <nav class="navbar navbar-expand sticky-top navbar-dark" style="background-color: #42CF5E">
-  <a class="navbar-brand">FT</a>
+  <a class="navbar-brand" href="/users/{{ user_id }}/friends">FT</a>
   <ul class="navbar-nav mr-auto">
     <li class="nav-item">
-      <a class="nav-link" href="/events/add-event/{{ friend.friend_id }}">Add New Event</a>
+      <a class="nav-link" data-toggle="modal" data-target="#test">Add New Event</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="/texts/send-text">Send your friend a text</a>
+      <a class="nav-link" data-toggle="modal" data-target="#send_text">Send your friend a text</a>
+    </li>
+    <li class="nav-item">
+      <a class="nav-link" data-toggle="modal" data-target="#create_reminder">Create a Reminder</a>
     </li>
   </ul>
 </nav>
 
-<div class="container-fluid">
-  <div class=row>
-    <div class="col-3">
-      <h1 class="text-center" id="friend-name">{{ friend.full_name }}</h1>
-    </div>
-    <div class="col">
-      <h2 class="friend-info" id="timeline-head">Event Timeline</h2>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-3" id="friend-info-col">
-      <div class="text-center">
-        <img src="{{friend.picture}}" class="img-thumbnail">
+<div class="modal" id="create_reminder" tabindex="-1" role="dialogue" ara-labelledby="createReminder" aria-hidden="true">
+  <div class="modal-dialogue" style="display: flex">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="create-reminder-title">Create Reminder</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+        </button>
       </div>
-      <div class="container" id="friend-info-list">
-        <li><b>Birthday:</b> {{bday}}</li>
-        <li><b>When we met:</b> {{date_met}}</li>
-        <li><b>Friend type:</b> {{friend.ftype.name}}</li>
-        <li><b>Likes:</b> {{friend.likes}}</li>
-        <li><b>Dislikes:</b> {{friend.dislikes}}</li>
-      {% for social in friend.social_medias %}
-        <li><a href="{{social.url}}"><img class="stype-pic"src="{{ social.stype.logo }}"></a></li>
-      {% endfor %}
-      </div>
-    </div>
-    <div class="col">
-      <div class="container" style="background-color: #C5E8CC">
-        {% for event in friend.events %}
-          <div class="container py-3">
-            <div class="row">
-              <div class="col-2">{{ event.date.strftime('%B, %d, %Y') }}
-              </div>
-              <div class="col-2">
-              {{ event.etype.event_type }}
-              </div>
-              <div class="col">
-              {{ event.details }}
-              </div>
+      <div class="modal-body">
+        <form class="form" action="/reminders" method="POST" id="reminder-form-id">
+          <div class="reminder-form">
+            <div class="form-group row">
+              <div class="input-name col p-0">1-3 word description:</div>
+              <div class="col-6 mr-4"><input type="text" class="form-control" name="reminder_name" required></div>
+            </div>
+            <div class="form-group row">
+              <div class="input-name col p-0">When do you want to be reminded?</div>
+              <div class="col-6 mr-4"><input type="datetime-local" class="form-control" name="reminder_time" required></div>
             </div>
           </div>
-        {% endfor %}
+       </div>
+       <div class="modal-footer">
+        <button type="submit" class="btn btn-success mt-2">Create Reminder!</button>
+      </form>
       </div>
     </div>
   </div>
 </div>
 
-{# <div class="container">
-  <h1 class="friend-info" id="{{ friend.full_name }}">{{ friend.full_name }}</h1>
-  <img src={{friend.picture}} class="img-thumbnail">
-  <li>Birthday: {{friend.bday}}</li>
-  <li>When we met: {{friend.date_met}}</li>
-  <li>Friend type: {{friend.ftype.name}}</li>
-  <li>Likes: {{friend.likes}}</li>
-      <li>Dislikes: {{friend.dislikes}}</li>
-      {% for social in friend.social_medias %}
-        <li><a href={{social.url}}>{{ social.stype.name}}<a></li>
-      {% endfor %}
-      {% for event in friend.events %}
+
+<div class="modal" id="test" tabindex="-1" role="dialogue" ara-labelledby="example" aria-hidden="true">
+  <div class="modal-dialogue" style="display: flex">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="add-event-title">Add Event with {{ friend.full_name }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form" action="/events" method="POST">
+          <div class="event-form">
+            <div class="form-group row">
+              <div class="input-name col p-0">Event Type:</div>
+              <div class="col-7 mr-4">
+                <select class="form-control" name='event_type'>
+                  {% for type in types %}
+                  <option value={{type.event_key}}>{{type.event_type}}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <div class="form-group row">
+              <div class="input-name col p-0">Date:</div>
+              <div class="col-7 mr-4"><input class="form-control" type="date" name="event_date" required></div>
+            </div>
+            <div class="form-group row">
+              <div class="input-name col p-0">Event Details:</div>
+              <div class="col-7 mr-4"><input type="text" class="form-control col" name="details" required></div>
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-success mt-2">Create Event!</button>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="send_text" tabindex="-1" role="dialogue" ara-labelledby="example" aria-hidden="true">
+  <div class="modal-dialogue" style="display: flex">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="add-event-title">Send a Text</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form" action="/texts" method="POST">
+          <div class="text-form">
+            <div class="form-group row">
+              <div class="input-name col p-0">Phone Number:</div>
+              <div class="col-7 mr-4"><input class="form-control" type="text" name="phone_number" required></div>
+            </div>
+            <div class="form-group row">
+             <div class="input-name col p-0">Message:</div>
+             <div class="col-7 mr-4"><input class="form-control" type="text" name="message"></div>
+           </div>
+         </div>
+       </div>
+       <div class="modal-footer">
+        <button type="submit" class="btn btn-success mt-2">Send Text!</button>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-4">
+      <div><h1 class="text-center mt-4"id="friend-name">{{ friend.full_name }}</h1></div>
+      <div><img src="{{friend.picture}}" class="img-thumbnail rounded-circle"></div>
+      <div class="info rounded-lg m-3">
+        <li><b>Birthday:</b> {{bday}}</li>
+        <li><b>When we met:</b> {{date_met}}</li>
+        <li><b>Friend type:</b> {{friend.ftype.name}}</li>
+        <li><b>Likes:</b> {{friend.likes}}</li>
+        <li><b>Dislikes:</b> {{friend.dislikes}}</li>
+      
         <li>
-          {{ event.date }}
-          {{ event.etype.event_type }}
-          {{ event.details }}
+          <div class="social-list">
+              {% for social in friend.social_medias %}
+                <a href="{{social.url}}"><img class="stype-pic"src="{{ social.stype.logo }}"></a>
+              {% endfor %}
+          </div>
         </li>
-      {% endfor %}
-</div> #}
+      </div>
+    </div>
+
+    <div class="col pt-5">
+      <div><h2 class="friend-info mb-1" id="timeline-head">Event Timeline</h2></div>
+      <div class="container rounded-lg p-3 mb-5" id="events-container" style="background-color: #C5E8CC; overflow: auto; height: 800px;">
+        {% for event in events %}
+          <div class="events rounded p-3 my-2" style="background-color: white;" id="event-id-{{ event.event_id }}">
+            <b style="color: #09340D">{{ event.date.strftime('%B %d, %Y') }}</b>
+            <span style="color: #157F1F">{{ event.etype.event_type }}</span>
+            <div>{{ event.details }}</div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+  
+</div>
+
 {% endblock %}
