@@ -110,7 +110,15 @@ flask crontab add
 
 * provide the job with Twilio API keys: 
 ````
-tbd
+crontab -e
+````
+insert the following after the `FLASK_APP=cronjobs.py` and before the filepath: 
+````
+account_sid="TWILIO_ACCOUNT_SID" auth_token="TWILIO_AUTH_TOKEN"
+````
+The result should look something like this: 
+````
+* * * * * cd /home/rest_of_filepath && FLASK_APP=cronjobs.py account_sid="TWILIO_ACCOUNT_SID"auth_token="2a0e1cf2516d31d1" /home/filepath -m flask crontab run cronjob_hash_here  # Flask cron jobs for model
 ````
 
 10. Run the app: 
