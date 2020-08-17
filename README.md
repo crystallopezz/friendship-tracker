@@ -24,38 +24,38 @@ App Demo can be found here: https://www.youtube.com/watch?v=0Q46ANF7mBs&t=1s
 List of features below
 
 ## Login
-![Login Image](https://github.com/crystallopezz/friendship-tracker/blob/master/Login.png)
+![Login Image](https://github.com/crystallopezz/friendship-tracker/blob/master/static/readme_files/Login.png)
 
 ## Friend List
-![Friend List](https://github.com/crystallopezz/friendship-tracker/blob/master/Friend%20List.png)
+![Friend List](https://github.com/crystallopezz/friendship-tracker/blob/master/static/readme_files/Friend%20List.png)
 
 ## Adding a Friend
 Easily add a new friend to track. Include their basic information, interests and socials.
 
-![Adding Friend](https://github.com/crystallopezz/friendship-tracker/blob/master/Add%20New%20Friend.png)
+![Adding Friend](https://github.com/crystallopezz/friendship-tracker/blob/master/static/readme_files/Add%20New%20Friend.png)
 
 ## Friend Profile
 View a specific friend's information and a timeline of your logged events with them in one place. This page is where the next three features live.
 
-![Friend Profile](https://github.com/crystallopezz/friendship-tracker/blob/master/Friend%20Profile.png)
+![Friend Profile](https://github.com/crystallopezz/friendship-tracker/blob/master/static/readme_files/Friend%20Profile.png)
 
 ## Adding A New Event
 Log a new event with your friend including the date and event details. The new event will automatically show up in your timeline.
 
-![AddEvent1](https://github.com/crystallopezz/friendship-tracker/blob/master/Add%20Event.png)
-![AddEvent2](https://github.com/crystallopezz/friendship-tracker/blob/master/Add%20Event%202.png)
+![AddEvent1](https://github.com/crystallopezz/friendship-tracker/blob/master/static/readme_files/Add%20Event.png)
+![AddEvent2](https://github.com/crystallopezz/friendship-tracker/blob/master/static/readme_files/Add%20Event%202.png)
 
 ## Texting Friend
 Text your friend from within the app using Twilio's API!
 
-![TextFriend1](https://github.com/crystallopezz/friendship-tracker/blob/master/Send%20Text.png)
-![TextFriend2](https://github.com/crystallopezz/friendship-tracker/blob/master/Send%20Text%202.png)
+![TextFriend1](https://github.com/crystallopezz/friendship-tracker/blob/master/static/readme_files/Send%20Text.png)
+![TextFriend2](https://github.com/crystallopezz/friendship-tracker/blob/master/static/readme_files/Send%20Text%202.png)
 
 ## Setting up Reminders
 Set up a text reminder related to your friend from within the app using Twilio's API.
 
-![Reminder1](https://github.com/crystallopezz/friendship-tracker/blob/master/Reminder%201.png)
-![Reminder2](https://github.com/crystallopezz/friendship-tracker/blob/master/Reminder%202.png)
+![Reminder1](https://github.com/crystallopezz/friendship-tracker/blob/master/static/readme_files/Reminder%201.png)
+![Reminder2](https://github.com/crystallopezz/friendship-tracker/blob/master/static/readme_files/Reminder%202.png)
 
 
 # Installation
