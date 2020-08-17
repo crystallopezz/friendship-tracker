@@ -1,0 +1,11 @@
+// import jquery
+
+// $.post('#reminder-form-id', .on('submit', (evt) => {
+//     evt.preventDefault();
+
+//     const formValues = $('#color-form').serialize();
+
+//     $.post('/reminders', formValues, (res) => {
+//         alert(res)
+//     });
+// });
